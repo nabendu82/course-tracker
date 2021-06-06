@@ -1,7 +1,7 @@
 import CourseForm from './components/CourseForm';
 import CourseList from './components/CourseList';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   const [courses, setCourses] = useState([]);
