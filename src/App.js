@@ -15,6 +15,10 @@ function App() {
         console.error(error);
     }
   }
+
+  useEffect(() => {
+    loadCourses();
+  }, []);
   
   return (
     <div className="container mt-5">
