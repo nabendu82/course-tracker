@@ -7,17 +7,20 @@ function App() {
   const [courses, setCourses] = useState([]);
   
   const loadCourses = async () => {
-    try {
-      const res = await fetch('/.netlify/functions/courses');
-      const courses = await res.json();
-      setCourses(courses);
-    } catch (error) {
-        console.error(error);
-    }
+    const url = 'https://worker.eli4ka-bagirova.workers.dev';
+
+    const resp = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-type': `application/json`,
+      }
+    })
+
+    return resp.json();
   }
 
   useEffect(() => {
-    loadCourses();
+    loadCourses().then(res => setCourses(res));
   }, []);
   
   return (
