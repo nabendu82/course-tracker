@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import Tags from './Tags';
+import Airtable from 'airtable';
+
+var base = new Airtable({apiKey: 'keyKRE5t18WyBYUCE'}).base('appgJ22XuOFl3wOIR');
 
 export default function CourseForm({ courseAdded }) {
     const [name, setName] = useState('');
@@ -7,26 +10,36 @@ export default function CourseForm({ courseAdded }) {
     const [tags, setTags] = useState([]);
     const [count, setCount] = useState(0);
 
-    const resetForm = () => {
-        setName('');
-        setLink('');
-        setCount(count + 1);
-    };
+    // const resetForm = () => {
+    //     setName('');
+    //     setLink('');
+    //     setCount(count + 1);
+    // };
 
-    const submitCourse = async (e) => {
-        e.preventDefault();
-        try {
-            await fetch('/.netlify/functions/courses', {
-                method: 'POST',
-                body: JSON.stringify({ name, link, tags }),
-            });
-            resetForm();
-            courseAdded();
-        } catch (err) {
-            console.error(err);
-        }
-        console.log(name, link);
-    };
+    // const submitCourse = async (e) => {
+    //     e.preventDefault();
+
+    //     try {
+    //       base('Form Submission').create([
+    //         {
+    //           "fields": { tag: 'node'}
+    //         },
+    //       ], function(err, records) {
+    //         if (err) {
+    //           console.error(err);
+    //           return;
+    //         }
+    //         records.forEach(function (record) {
+    //           console.log(record.getId());
+    //         });
+    //       });
+    //         resetForm();
+    //         courseAdded();
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    //     console.log(name, link);
+    // };
     
     return (
         <div className="card">
