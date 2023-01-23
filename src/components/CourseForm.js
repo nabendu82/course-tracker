@@ -13,20 +13,20 @@ export default function CourseForm({ courseAdded }) {
         setCount(count + 1);
     };
 
-    // const submitCourse = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         await fetch('/.netlify/functions/courses', {
-    //             method: 'POST',
-    //             body: JSON.stringify({ name, link, tags }),
-    //         });
-    //         resetForm();
-    //         courseAdded();
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    //     console.log(name, link);
-    // };
+    const submitCourse = async (e) => {
+        e.preventDefault();
+        try {
+            await fetch('/.netlify/functions/courses', {
+                method: 'POST',
+                body: JSON.stringify({ name, link, tags }),
+            });
+            resetForm();
+            courseAdded();
+        } catch (err) {
+            console.error(err);
+        }
+        console.log(name, link);
+    };
     
     return (
         <div className="card">
