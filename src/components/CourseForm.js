@@ -49,7 +49,7 @@ export default function CourseForm({ courseAdded }) {
                   className=""
                   // onSubmit={submitCourse}
                   method="POST"
-                  action='https://worker.eli4ka-bagirova.workers.dev/submit'
+                  // action='https://worker.eli4ka-bagirova.workers.dev/submit'
                 >
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
