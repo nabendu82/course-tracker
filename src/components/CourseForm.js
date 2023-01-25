@@ -1,45 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Tags from './Tags';
-import Airtable from 'airtable';
-
-var base = new Airtable({apiKey: 'keyKRE5t18WyBYUCE'}).base('appgJ22XuOFl3wOIR');
 
 export default function CourseForm({ courseAdded }) {
+    const [formData, setFormData] = useState('');
     const [name, setName] = useState('');
     const [link, setLink] = useState('');
     const [tags, setTags] = useState([]);
     const [count, setCount] = useState(0);
 
-    // const resetForm = () => {
-    //     setName('');
-    //     setLink('');
-    //     setCount(count + 1);
-    // };
+    useEffect(() => {
+      setFormData(new FormData());
+    }, []);
 
-    // const submitCourse = async (e) => {
-    //     e.preventDefault();
+    const resetForm = () => {
+        setName('');
+        setLink('');
+        setCount(count + 1);
+    };
 
-    //     try {
-    //       base('Form Submission').create([
-    //         {
-    //           "fields": { tag: 'node'}
-    //         },
-    //       ], function(err, records) {
-    //         if (err) {
-    //           console.error(err);
-    //           return;
-    //         }
-    //         records.forEach(function (record) {
-    //           console.log(record.getId());
-    //         });
-    //       });
-    //         resetForm();
-    //         courseAdded();
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    //     console.log(name, link);
-    // };
+    const submitCourse = async (e) => {
+        // e.preventDefault();
+
+        // const url = 'https://worker.eli4ka-bagirova.workers.dev/sumbit'
+
+        // try {
+        //   await fetch(url, {
+        //     method: 'POST',
+        //     body: JSON.stringify({ name, link, tags }),
+        //     headers: {
+        //       'Content-type': `application/json`,
+        //     },
+        //   });
+        //     resetForm();
+        //     courseAdded();
+        // } catch (err) {
+        //     console.error(err);
+        // }
+        console.log(FormData);
+        console.log(JSON.stringify({ name, link, tags }));
+    };
     
     return (
         <div className="card">
@@ -47,9 +46,9 @@ export default function CourseForm({ courseAdded }) {
             <div className="card-body">
                 <form
                   className=""
-                  // onSubmit={submitCourse}
+                  onSubmit={submitCourse}
                   method="POST"
-                  // action='https://worker.eli4ka-bagirova.workers.dev/submit'
+                  action='https://worker.eli4ka-bagirova.workers.dev/submit'
                 >
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
@@ -79,6 +78,7 @@ export default function CourseForm({ courseAdded }) {
                         Submit
                     </button>
                 </form>
+                <div>{JSON.stringify(...formData)}</div>
             </div>
         </div>
     );
