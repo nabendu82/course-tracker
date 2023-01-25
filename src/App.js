@@ -20,7 +20,10 @@ function App() {
   }
 
   useEffect(() => {
-    loadCourses().then(res => setCourses(res));
+    loadCourses().then(res => {
+      console.log(res.map(course => ({...course.fields, id: course.id })));
+      return setCourses(res.map(course => ({...course.fields, course})));
+    });
   }, []);
   
   return (

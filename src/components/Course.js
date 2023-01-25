@@ -2,10 +2,21 @@ import React from 'react'
 
 const Course = ({ course, refreshCourses }) => {
     const markCoursePurchased = async () => {
+    const courseToUpdate = {
+      id: course.id,
+      fields: {
+        name: course.name,
+        tags: course.tags,
+        link: course.link,
+        purchased: true,
+      }
+    }
         try {
-            await fetch('/.netlify/functions/courses', {
-                method: 'PUT',
-                body: JSON.stringify({ ...course, purchased: true }),
+            await fetch('https://worker.eli4ka-bagirova.workers.dev/purchase', {
+                method: 'POST',
+                // mode: 'no-cors',
+                body: JSON.stringify(courseToUpdate),
+                'Content-type': `application/json`,
             });
             refreshCourses();
         } catch (err) {
