@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Tags from './Tags';
 
 export default function CourseForm({ courseAdded }) {
@@ -6,33 +6,16 @@ export default function CourseForm({ courseAdded }) {
     const [link, setLink] = useState('');
     const [tags, setTags] = useState([]);
     const [count, setCount] = useState(0);
-
-    const resetForm = () => {
-        setName('');
-        setLink('');
-        setCount(count + 1);
-    };
-
-    const submitCourse = async (e) => {
-        e.preventDefault();
-        try {
-            await fetch('/.netlify/functions/courses', {
-                method: 'POST',
-                body: JSON.stringify({ name, link, tags }),
-            });
-            resetForm();
-            courseAdded();
-        } catch (err) {
-            console.error(err);
-        }
-        console.log(name, link);
-    };
     
     return (
         <div className="card">
             <div className="card-header">Add a New Course</div>
             <div className="card-body">
-                <form className="" onSubmit={submitCourse}>
+                <form
+                  className=""
+                  method="POST"
+                  action='https://worker.eli4ka-bagirova.workers.dev/submit'
+                >
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
                         <input

@@ -22,6 +22,7 @@ const Tags = ({ tagsUpdated, key }) => {
 
     useEffect(() => {
         tagsUpdated(selectedTags);
+        console.log(selectedTags);
     }, [selectedTags, tagsUpdated]);
 
     return (
@@ -31,6 +32,7 @@ const Tags = ({ tagsUpdated, key }) => {
                     <input
                         type="checkbox"
                         value={choice}
+                        name="tag"
                         onChange={tagChange}
                     />
                     {' ' + choice}
